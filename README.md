@@ -187,3 +187,28 @@ To setup a cells environment add the following to your `localrc`:
     disable_service n-xvnc
 
 Be aware that there are some features currently missing in cells, one notable one being security groups.
+
+# Starting a Devcloud using Vagrant
+
+Optionally, [Vagrant](http://vagrantup.com) can create and configure a Devcloud.  By default, a `vagrant up` will yield a Devcloud with the following configuration:
+
+* 1 core/1536 MB memory/50 GB disk space
+* Ubuntu 12.04.2
+* Swift disabled
+* Single node configuration
+* A NAT interface
+* A host-only interface listing on 10.0.3.50
+* Horizon: http://10.0.3.50/
+* Keystone: http://10.0.3.50:5000/v2.0/
+
+The Vagrant configuration generates a localrc to tie the hypervisor configuration to the OpenStack configuration.  To customize localrc, place the desired localrc overrides in vagrant-overrides.conf.  In addition to supporting all of the variables in localrc, the following addition options can be provided in vagrant-overrides:
+
+* cores: The number of cores to allocate to the virtual machine
+* memory: The amount of RAM (in megabytes) to allocate to the virtual machine
+
+Currently, the Vagrant configuration has the following limitations:
+
+1. Only supports the VirtualBox provider (tested using version 4.2.12)
+1. Only supports single node operation
+1. Does not support generating a localrc that disables services
+
